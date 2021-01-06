@@ -16,11 +16,9 @@ fn main() {
   let target_dir = &target_dir;
 
   fs::create_dir_all(target_dir).unwrap();
-  dbg!(target_dir);
   for file in fs::read_dir(lib_dir).unwrap().map(|e|e.unwrap().path()) {
     if file.extension() == Some(OsStr::new("dll")) {
       let new_path = target_dir.join(file.file_name().unwrap().to_str().unwrap());
-      dbg!(&file, &new_path);
       fs::copy(file, new_path).unwrap();
     }
   }
